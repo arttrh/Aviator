@@ -1,9 +1,10 @@
 package aeroporto_project.domain.cors;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
+
 import aeroporto_project.domain.enums.VooStatus;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
 import jakarta.persistence.EnumeratedValue;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,8 +19,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ReservaEntity {
-
+public class ReservaEntity{
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
@@ -27,8 +27,21 @@ public class ReservaEntity {
   private Long voo_id;
   private String classe;
   private String assento;
-  @EnumeratedValue(EnumType.STRING)
+  @EnumeratedValue
   private VooStatus status;
   private LocalDateTime criado_em;
+
+  @Override
+  public boolean equals(Object o){
+    if(this == o) return true;
+    if(o == null || getClass() != o.getClass()) return false;
+    ReservaEntity reserva = (ReservaEntity) o;
+    return Objects.equals(id, reserva.id);
+  }
+
+  @Override
+  public int hashCode(){
+    return Objects.hash(id);
+  }
 }
 
