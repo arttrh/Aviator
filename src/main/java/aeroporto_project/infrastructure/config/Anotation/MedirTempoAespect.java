@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class MedirTempoAespect {
 
-  @Around("@annotation(MedirtempoMethod)")
+  @Around("@annotation(MethodCustom)")
   public Object monitorarTempo(ProceedingJoinPoint joinPoint) throws Throwable{
     long inicio = System.currentTimeMillis();
     Object resultado = joinPoint.proceed();
